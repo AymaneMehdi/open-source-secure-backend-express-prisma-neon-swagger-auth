@@ -42,7 +42,16 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "prisma": "prisma"
+    "prisma": "prisma",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:seed": "node prisma/seed.js",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma db push --force-reset && npm run db:seed",
+    "test": "node test-api.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^5.4.2",
