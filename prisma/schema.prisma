@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  firstName String
+  lastName  String
+  email     String   @unique
+  age       Int
+  password  String?  // Optional for OAuth users
+  provider  String?  // For OAuth (google, github, local)
+  providerId String? // OAuth provider ID
+  refreshToken String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([provider, providerId])
+}
+
+enum Role {
+  USER
+  ADMIN
+  MODERATOR
+  SUPERADMIN
+}
